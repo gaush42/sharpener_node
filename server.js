@@ -1,25 +1,21 @@
 const http = require('http');
 
 const server = http.createServer((req, res) => {
-    res.statusCode = 200; // Default status code
+    const url = req.url;
+    const method = req.method;
 
-    if (req.url === '/home') {
-        res.setHeader('Content-Type', 'text/plain');
-        res.end('Welcome home');
-    } 
-    else if (req.url === '/about') {
-        res.setHeader('Content-Type', 'text/plain');
-        res.end('Welcome to About Us');
-    } 
-    else if (req.url === '/node') {
-        res.setHeader('Content-Type', 'text/plain');
-        res.end('Welcome to my Node Js project');
-    } 
-    else {
-        res.statusCode = 404; // Set status code to 404 for unknown URLs
-        res.setHeader('Content-Type', 'text/plain');
-        res.end('Page Not Found');
+    if(req.url==='/'){
+        res.setHeader('Content-Type','text/html');
+        res.end(
+            `
+            <form>
+            <label>Name:</label>
+            <input type="text" name="username"></input>
+            </form>
+            `
+        )
     }
+    
 });
 
 server.listen(3000, () => {
